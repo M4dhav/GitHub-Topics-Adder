@@ -160,7 +160,10 @@ export default function TopicForm() {
           placeholder="ghp_... or github_pat_..."
         />
         <span className="text-xs text-zinc-500">
-          Sent only from your browser to api.github.com. It is never stored.
+          Sent only from your browser to api.github.com. It is never stored.{" "}
+          <a href="#token-help" className="underline underline-offset-2">
+            Need a token?
+          </a>
         </span>
       </label>
 
