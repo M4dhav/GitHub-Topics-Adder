@@ -1,0 +1,25 @@
+# GitHub Topic Adder
+
+> A single-page web app for adding several topics to a GitHub repository at once, instead of typing them in one at a time on the repository's About settings.
+
+The site has no backend and no public API. It is a user interface: the visitor supplies a GitHub personal access token, and their own browser calls the GitHub REST API directly. The token is never sent to the server hosting this site and is never stored.
+
+## How it works
+
+- GitHub's `PUT /repos/{owner}/{repo}/topics` endpoint replaces every topic on a repository. To add topics rather than overwrite them, the app reads the current topics first and sends the old and new lists together. A checkbox switches to replacing them instead.
+- Topics are lowercased and spaces become hyphens, so "Machine Learning" becomes `machine-learning`. Duplicates are dropped.
+- Rules checked before sending: lowercase letters, numbers and hyphens only; must start with a letter or number; 50 characters per topic at most; 20 topics per repository at most.
+- Accepted repository formats: `https://github.com/owner/repo`, `github.com/owner/repo`, and `owner/repo`.
+
+## Token requirements
+
+- The user needs the Maintain or Admin role on the repository. Write access is not enough to change topics.
+- Fine-grained token: the Administration permission set to Read and write, with the repository selected and the resource owner set to the account or organization that owns it.
+- Classic token: the `repo` scope, or `public_repo` for public repositories only.
+- Organization repositories may additionally need an owner to approve a fine-grained token, or SAML SSO authorization for a classic token.
+
+## Links
+
+- [Source repository](https://github.com/M4dhav/GitHub-Topics-Adder): full source, built with Next.js
+- [GitHub repository topics API](https://docs.github.com/en/rest/repos/repos#replace-all-repository-topics): the endpoint this app calls
+- [Managing repository topics](https://docs.github.com/en/repositories/managing-your-repositorys-settings-and-features/customizing-your-repository/classifying-your-repository-with-topics): GitHub's own documentation on topics

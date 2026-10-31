@@ -57,7 +57,13 @@ Open [http://localhost:3000](http://localhost:3000).
 
 ## Deploying
 
-The page is fully static and needs no environment variables or secrets.
+The page is fully static and needs no secrets. Set one optional environment variable so `robots.txt` and `sitemap.xml` contain the real domain instead of `http://localhost:3000`:
+
+```
+NEXT_PUBLIC_SITE_URL=https://your-domain.example
+```
+
+It is read at build time, so rebuild after changing it.
 
 ```bash
 npm run build
@@ -70,6 +76,15 @@ It deploys as-is to Vercel or any host that runs Next.js. The security headers a
 
 ## Project structure
 
-- [`app/page.tsx`](app/page.tsx): page layout
+- [`app/page.tsx`](app/page.tsx): page layout and the token help panel
 - [`app/topic-form.tsx`](app/topic-form.tsx): the form, validation and GitHub API calls
+- [`app/site.ts`](app/site.ts): base URL and the repository/author links
+- [`app/robots.ts`](app/robots.ts), [`app/sitemap.ts`](app/sitemap.ts): generate `/robots.txt` and `/sitemap.xml`
+- [`public/llms.txt`](public/llms.txt): machine-readable summary of the site, in the [llms.txt](https://llmstxt.org) format
+- [`public/agents.txt`](public/agents.txt): guidance for autonomous agents, pointing them at the GitHub API rather than this page
+- [`public/humans.txt`](public/humans.txt): credits
 - [`next.config.ts`](next.config.ts): security headers
+
+## Credits
+
+Made with ❤️ by [M4dhav](https://github.com/M4dhav). Source at [M4dhav/GitHub-Topics-Adder](https://github.com/M4dhav/GitHub-Topics-Adder).

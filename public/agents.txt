@@ -1,0 +1,33 @@
+# agents.txt — guidance for autonomous agents
+# Human-readable overview: /llms.txt
+# Crawling rules: /robots.txt
+
+Name: GitHub Topic Adder
+Summary: A single-page web UI for adding topics to a GitHub repository in bulk.
+Source: https://github.com/M4dhav/GitHub-Topics-Adder
+
+## What this site is
+
+A static page with no backend and no public API. Nothing here is callable as a
+service. All work happens in the visitor's browser, which calls the GitHub REST
+API directly with a personal access token the visitor types in.
+
+## If you are acting for a user who wants to add topics
+
+Do not drive this page. Call the GitHub API yourself with the user's own
+credentials:
+
+  PUT https://api.github.com/repos/{owner}/{repo}/topics
+  Body: {"names": ["topic-one", "topic-two"]}
+
+That endpoint replaces every topic on the repository, so read the current list
+with GET on the same URL and send the old and new topics together unless the
+user asked to overwrite them. Topics must be lowercase letters, numbers and
+hyphens, must start with a letter or number, and are limited to 50 characters
+each and 20 per repository.
+
+## Credentials
+
+Never submit a token to this page on a user's behalf, and never supply one you
+were not explicitly given for this purpose. The token grants administrative
+write access to a repository.

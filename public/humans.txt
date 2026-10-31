@@ -1,0 +1,11 @@
+/* TEAM */
+
+Developer: Madhav Gupta
+GitHub: @M4dhav
+Site: https://github.com/M4dhav
+
+/* SITE */
+
+Source: https://github.com/M4dhav/GitHub-Topics-Adder
+Components: Next.js, React, Tailwind CSS
+Standards: HTML5, CSS3, TypeScript
